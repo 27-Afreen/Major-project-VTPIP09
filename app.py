@@ -15,8 +15,9 @@ def get_db():
     try:
         conn = mysql.connector.connect(
             host="localhost",
+            port=3307,
             user="root",
-            password="Afreen@123",      # <-- updated password
+            password="Afreen@123",
             database="vtpip09_2022"
         )
         return conn
@@ -30,9 +31,14 @@ mydb = get_db()
 def get_cursor():
     global mydb
     try:
-        mydb.ping(reconnect=True, attempts=3, delay=1)
+        if mydb is None:
+            mydb = get_db()
+        else:
+            mydb.ping(reconnect=True, attempts=3, delay=1)
     except Exception:
         mydb = get_db()
+    if mydb is None:
+        raise Exception("Database not connected. Please check MySQL is running and password is correct.")
     return mydb.cursor()
 
 # ────────────────────────────────────────────────────────────────────────────
