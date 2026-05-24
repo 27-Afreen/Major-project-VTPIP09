@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card text-center">
+            <div class="card-header py-3"><h4 class="mb-0"><i class="fas fa-key mr-2"></i>Your Access Key</h4></div>
+            <div class="card-body py-5">
+                <p class="text-muted mb-2">This is your personal scan access key. Keep it safe:</p>
+                {% if result %}
+                <div class="p-3 my-3 rounded" style="background:#e8eaf6; display:inline-block;">
+                    <h2 class="font-weight-bold mb-0" style="color:#1a237e; letter-spacing:4px; font-family:monospace;">{{ result[0] }}</h2>
+                </div>
+                {% else %}
+                <p class="text-danger">Key not found.</p>
+                {% endif %}
+                <div class="mt-4">
+                    <a href="/udisplay" class="btn btn-success btn-lg mr-2"><i class="fas fa-eye mr-1"></i>View Scan</a>
+                    <a href="/uhome" class="btn btn-secondary btn-lg"><i class="fas fa-home mr-1"></i>Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

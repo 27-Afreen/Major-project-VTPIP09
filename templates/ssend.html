@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <div class="card">
+            <div class="card-header py-3"><h4 class="mb-0"><i class="fas fa-upload mr-2"></i>Upload Scan Report</h4></div>
+            <div class="card-body p-4">
+                {% if result %}
+                <div class="alert alert-info">
+                    <strong>Patient:</strong> {{ result[1] }} &nbsp;|&nbsp;
+                    <strong>Email:</strong> {{ result[2] }} &nbsp;|&nbsp;
+                    <strong>Symptoms:</strong> {{ result[3] }}
+                </div>
+                <form method="POST" action="/send" enctype="multipart/form-data">
+                    <input type="hidden" name="id"  value="{{ result[0] }}">
+                    <input type="hidden" name="name" value="{{ result[1] }}">
+                    <input type="hidden" name="uid"  value="{{ result[2] }}">
+                    <input type="hidden" name="did"  value="{{ result[4] }}">
+                    <div class="form-group">
+                        <label><i class="fas fa-image mr-1"></i> Upload Scan Image</label>
+                        <input type="file" name="file" class="form-control-file" accept="image/*" required>
+                        <small class="text-muted">Accepted formats: JPG, PNG, BMP</small>
+                    </div>
+                    <button type="submit" class="btn btn-success btn-lg btn-block">Submit Report</button>
+                </form>
+                {% endif %}
+                <a href="/sreport" class="btn btn-secondary mt-3"><i class="fas fa-arrow-left mr-1"></i>Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

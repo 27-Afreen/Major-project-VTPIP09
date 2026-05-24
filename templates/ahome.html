@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header py-3"><h4 class="mb-0"><i class="fas fa-tachometer-alt mr-2"></i>Admin Dashboard</h4></div>
+            <div class="card-body">
+                <p class="text-muted mb-0">Welcome, <strong>Admin</strong>! Manage scan reports and system operations below.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6 mb-4">
+        <div class="card text-center h-100">
+            <div class="card-body py-5">
+                <i class="fas fa-file-medical fa-3x mb-3" style="color:#1a237e;"></i>
+                <h5>Pending Scan Reports</h5>
+                <p class="text-muted">View patient cases forwarded by doctors and upload scan results</p>
+                <a href="/sreport" class="btn btn-primary btn-lg">View Pending Reports</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 mb-4">
+        <div class="card text-center h-100">
+            <div class="card-body py-5">
+                <i class="fas fa-sign-out-alt fa-3x mb-3" style="color:#c62828;"></i>
+                <h5>Logout</h5>
+                <p class="text-muted">End your current session securely</p>
+                <a href="/logout" class="btn btn-danger btn-lg">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

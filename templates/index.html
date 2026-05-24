@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="text-center mb-5 mt-3">
+    <h1 class="font-weight-bold" style="color:#1a237e;">Medical Imaging & Report System</h1>
+    <p class="text-muted lead">Secure platform for patients, doctors, and administrators</p>
+</div>
+<div class="row justify-content-center">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 text-center">
+            <div class="card-header py-3"><h4 class="mb-0"><i class="fas fa-user-shield mr-2"></i>Admin</h4></div>
+            <div class="card-body d-flex flex-column justify-content-center py-4">
+                <p class="text-muted">Manage reports and oversee the system</p>
+                <a href="/admin" class="btn btn-primary btn-lg mt-2">Login as Admin</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 text-center">
+            <div class="card-header py-3"><h4 class="mb-0"><i class="fas fa-user-md mr-2"></i>Doctor</h4></div>
+            <div class="card-body d-flex flex-column justify-content-center py-4">
+                <p class="text-muted">View patient cases and manage reports</p>
+                <a href="/doctor" class="btn btn-primary btn-lg mt-2">Login as Doctor</a>
+                <a href="/dregister" class="btn btn-outline-secondary mt-2">Register</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 text-center">
+            <div class="card-header py-3"><h4 class="mb-0"><i class="fas fa-user mr-2"></i>Patient</h4></div>
+            <div class="card-body d-flex flex-column justify-content-center py-4">
+                <p class="text-muted">Submit symptoms and view your reports</p>
+                <a href="/user" class="btn btn-primary btn-lg mt-2">Login as Patient</a>
+                <a href="/uregister" class="btn btn-outline-secondary mt-2">Register</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

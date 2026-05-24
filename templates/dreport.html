@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+    <div class="card-header py-3"><h4 class="mb-0"><i class="fas fa-file-medical-alt mr-2"></i>Completed Report</h4></div>
+    <div class="card-body">
+        {% if result %}
+        <table class="table table-bordered">
+            <tr><th>Patient Name</th><td>{{ result[1] }}</td></tr>
+            <tr><th>Email</th><td>{{ result[2] }}</td></tr>
+            <tr><th>Symptoms</th><td>{{ result[3] }}</td></tr>
+            <tr><th>Status</th><td><span class="badge badge-success">{{ result[5] }}</span></td></tr>
+        </table>
+        <a href="/drep/{{ result[0] }}" class="btn btn-primary">View Scan Report</a>
+        {% else %}
+        <div class="text-center py-5">
+            <i class="fas fa-clock fa-3x text-warning mb-3"></i>
+            <h5 class="text-muted">No completed reports yet.</h5>
+        </div>
+        {% endif %}
+        <a href="/dhome" class="btn btn-secondary mt-2 ml-2"><i class="fas fa-arrow-left mr-1"></i>Back</a>
+    </div>
+</div>
+{% endblock %}

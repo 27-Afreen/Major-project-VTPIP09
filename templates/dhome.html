@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header py-3"><h4 class="mb-0"><i class="fas fa-user-md mr-2"></i>Doctor Dashboard</h4></div>
+            <div class="card-body">
+                <p class="text-muted mb-0">Welcome, Dr. <strong>{{ result }}</strong>! Manage your patient cases below.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 mb-4">
+        <div class="card text-center h-100">
+            <div class="card-body py-4">
+                <i class="fas fa-users fa-3x mb-3" style="color:#1a237e;"></i>
+                <h5>Pending Patients</h5>
+                <p class="text-muted">View patients waiting for review</p>
+                <a href="/duser" class="btn btn-primary">View Patients</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card text-center h-100">
+            <div class="card-body py-4">
+                <i class="fas fa-file-alt fa-3x mb-3" style="color:#2e7d32;"></i>
+                <h5>Completed Reports</h5>
+                <p class="text-muted">View completed scan reports</p>
+                <a href="/dreport" class="btn btn-success">View Reports</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card text-center h-100">
+            <div class="card-body py-4">
+                <i class="fas fa-sign-out-alt fa-3x mb-3" style="color:#c62828;"></i>
+                <h5>Logout</h5>
+                <p class="text-muted">End your session securely</p>
+                <a href="/logout" class="btn btn-danger">Logout</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

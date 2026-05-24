@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card text-center">
+            <div class="card-header py-3"><h4 class="mb-0"><i class="fas fa-file-image mr-2"></i>Your Scan Report</h4></div>
+            <div class="card-body py-5">
+                <i class="fas fa-shield-alt fa-4x mb-3" style="color:#1a237e;"></i>
+                <h5>Your scan is ready!</h5>
+                <p class="text-muted">Use your access key to view the scan image.</p>
+                <div class="mt-4">
+                    <a href="/urequest" class="btn btn-primary btn-lg mr-2"><i class="fas fa-key mr-1"></i>My Access Key</a>
+                    <a href="/udisplay" class="btn btn-success btn-lg"><i class="fas fa-eye mr-1"></i>View Scan</a>
+                </div>
+                <div class="mt-3">
+                    <a href="/uhome" class="btn btn-link text-muted"><i class="fas fa-arrow-left mr-1"></i>Back to Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
