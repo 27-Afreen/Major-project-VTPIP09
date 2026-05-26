@@ -4,6 +4,8 @@ import cv2
 import os
 import math
 import random
+from encryption import encrypt_image
+from model import run_diagnosis
 
 app = Flask(__name__)
 app.secret_key = 'your secret key'
@@ -244,21 +246,54 @@ def send():
         uid  = request.form['uid']
         did  = request.form['did']
         f    = request.files['file']
-        # ── FIX 3: Use portable path (no hardcoded C:/MajorProject) ────────
-        fname = os.path.join(app.root_path, 'static', secure_filename(f.filename))
-        f.save(secure_filename(f.filename))
-        img = cv2.imread(secure_filename(f.filename))
-        cv2.imwrite(fname, img)
+
+        safe_name   = secure_filename(f.filename)
+        static_dir  = os.path.join(app.root_path, 'static')
+        temp_path   = os.path.join(static_dir, safe_name)
+
+        # Save uploaded file temporarily
+        f.save(temp_path)
+
+        # ── ENCRYPT the image using SKK scheme ──────────────────────────────
+        try:
+            enc_name, _ = encrypt_image(temp_path, static_dir, filter_type='median')
+            print(f"[APP] Image encrypted → {enc_name}")
+        except Exception as e:
+            print(f"[APP] Encryption failed: {e}")
+            enc_name = safe_name   # fallback: use original
+
+        # ── RUN DIAGNOSIS with DenseNet-121 & XceptionNet ───────────────────
+        enc_path = os.path.join(static_dir, enc_name)
+        try:
+            diag = run_diagnosis(enc_path)
+            diagnosis = diag['final']
+            densenet_conf = diag['densenet']['confidence']
+            xception_conf = diag['xception']['confidence']
+            print(f"[APP] Diagnosis: {diagnosis}")
+        except Exception as e:
+            print(f"[APP] Diagnosis failed: {e}")
+            diagnosis     = "Analysis Pending"
+            densenet_conf = "N/A"
+            xception_conf = "N/A"
+
+        # Store encrypted filename + diagnosis in DB
         key = token()
-        var = (cid, name, uid, did, secure_filename(f.filename), key)
+        var = (cid, name, uid, did, enc_name, key, diagnosis, densenet_conf, xception_conf)
         cursor = get_cursor()
-        cursor.execute('INSERT INTO sreport VALUES (%s, %s, %s, %s, %s, %s)', var)
+        cursor.execute(
+            'INSERT INTO sreport VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)', var
+        )
         mydb.commit()
-        os.remove(secure_filename(f.filename))
+
+        # Remove temp original
+        if os.path.exists(temp_path) and temp_path != enc_path:
+            os.remove(temp_path)
+
         if cursor.rowcount == 1:
             cursor2 = get_cursor()
             cursor2.execute("UPDATE userdet SET status = 'completed' WHERE Id = %s", (cid,))
             mydb.commit()
+            flash(f"Report uploaded & encrypted! Diagnosis: {diagnosis}")
             return render_template('ahome.html')
         else:
             cursor3 = get_cursor()
