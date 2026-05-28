@@ -34,7 +34,7 @@ This project proposes an enhanced **Learnable Image Encryption Scheme** based on
 
 ---
 
-## Problem Statement — Existing System
+## Problem Statement - Existing System
 
 The existing approach (SRCNN/GDSR-based) has the following limitations:
 
@@ -49,13 +49,13 @@ The existing approach (SRCNN/GDSR-based) has the following limitations:
 
 Our system introduces an enhanced version of the SKK encryption scheme with three stages:
 
-### Stage 1 — Negative-Positive Transformation
+### Stage 1 - Negative-Positive Transformation
 Inverts all pixel values (`new_pixel = 255 - pixel`) to obscure the visual content of the image before it leaves the client.
 
-### Stage 2 — Color Channel Shuffling
+### Stage 2 - Color Channel Shuffling
 Randomly shuffles the RGB channels of the image using a secret permutation key, making colour-based pattern recognition impossible without the key.
 
-### Stage 3 — Statistical Smoothing (4 Filters)
+### Stage 3 - Statistical Smoothing (4 Filters)
 Divides the image into fixed-size blocks and applies one of the following filters to fill all elements of a block with a single statistical value:
 
 | Filter | Operation |
