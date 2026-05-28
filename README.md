@@ -28,7 +28,7 @@
 
 ## Abstract
 
-The growing dependency on cloud servers for training Deep Neural Network (DNN) models raises serious privacy concerns, especially in the medical domain. Cloud servers are considered **semi-honest** — they process data correctly but may attempt to observe and exploit it. Sharing raw medical images with such servers exposes sensitive patient data.
+The growing dependency on cloud servers for training Deep Neural Network (DNN) models raises serious privacy concerns, especially in the medical domain. Cloud servers are considered **semi-honest**  they process data correctly but may attempt to observe and exploit it. Sharing raw medical images with such servers exposes sensitive patient data.
 
 This project proposes an enhanced **Learnable Image Encryption Scheme** based on the original SKK scheme. Medical images are encrypted on the client side before being transmitted to the server. The encrypted images are then used for DNN training using **DenseNet-121** and **XceptionNet** models. The experiment demonstrates that privacy can be effectively preserved while maintaining diagnostic accuracy comparable to training on raw images.
 
@@ -124,23 +124,23 @@ The system follows a three-tier architecture:
 
 | Feature | Details | Status |
 |---------|---------|--------|
-| Role-based web portal | Admin, Doctor, Patient dashboards | ✅ Complete |
-| Patient registration & login | Email + password authentication | ✅ Complete |
-| Doctor registration & login | Email + password + department | ✅ Complete |
-| Symptom submission workflow | Patient → Doctor → Lab → Report | ✅ Complete |
-| Scan image upload by lab | File upload with secure storage | ✅ Complete |
-| SKK Encryption — Stage 1 | Negative-positive transformation | ✅ Complete |
-| SKK Encryption — Stage 2 | Color channel shuffling | ✅ Complete |
-| SKK Encryption — Stage 3 | Median / Mean / Max / Min filters | ✅ Complete |
-| Image resized to 256×256 | Before DNN input as per requirement | ✅ Complete |
-| DenseNet-121 integration | Pre-trained model for medical diagnosis | ✅ Complete |
-| XceptionNet integration | Pre-trained model for cross-validation | ✅ Complete |
-| Majority-vote final diagnosis | Combined result from both models | ✅ Complete |
-| Encrypted image displayed to doctor | Doctor views encrypted scan | ✅ Complete |
-| AI diagnosis result shown | Normal / Abnormal with confidence % | ✅ Complete |
-| Secure access token (10-char) | Patient uses key to access report | ✅ Complete |
-| MySQL database (4 tables) | user, doctor, userdet, sreport | ✅ Complete |
-| Privacy details shown in UI | Encryption scheme details visible | ✅ Complete |
+| Role-based web portal | Admin, Doctor, Patient dashboards | 
+| Patient registration & login | Email + password authentication | 
+| Doctor registration & login | Email + password + department | 
+| Symptom submission workflow | Patient → Doctor → Lab → Report | 
+| Scan image upload by lab | File upload with secure storage | 
+| SKK Encryption — Stage 1 | Negative-positive transformation | 
+| SKK Encryption — Stage 2 | Color channel shuffling | 
+| SKK Encryption — Stage 3 | Median / Mean / Max / Min filters | 
+| Image resized to 256×256 | Before DNN input as per requirement |
+| DenseNet-121 integration | Pre-trained model for medical diagnosis | 
+| XceptionNet integration | Pre-trained model for cross-validation |  
+| Majority-vote final diagnosis | Combined result from both models | 
+| Encrypted image displayed to doctor | Doctor views encrypted scan | 
+| AI diagnosis result shown | Normal / Abnormal with confidence % | 
+| Secure access token (10-char) | Patient uses key to access report | 
+| MySQL database (4 tables) | user, doctor, userdet, sreport | 
+| Privacy details shown in UI | Encryption scheme details visible | 
 
 ---
 
