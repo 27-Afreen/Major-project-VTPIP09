@@ -1,6 +1,6 @@
 # Privacy-Preserving Deep Learning With Learnable Image Encryption on Medical Images
 
-**VTPIP09 Major Project** — A secure end-to-end medical imaging platform that encrypts patient scan images on the client side using an enhanced SKK learnable encryption scheme before sending them to a cloud server for DNN-based diagnosis, ensuring patient data privacy without compromising model performance.
+**VTPIP09 Major Project** - A secure end-to-end medical imaging platform that encrypts patient scan images on the client side using an enhanced SKK learnable encryption scheme before sending them to a cloud server for DNN-based diagnosis, ensuring patient data privacy without compromising model performance.
 
 ---
 
