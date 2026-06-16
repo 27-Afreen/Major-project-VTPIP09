@@ -21,6 +21,11 @@ instance/
 # Environment variables
 .env
 .env.local
+notepad*.env*
+
+# Local run logs / temporary test uploads
+*.log
+download.*
 
 # IDE
 .vscode/

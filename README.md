@@ -16,7 +16,7 @@ Suggested topics:
 python, flask, mysql, opencv, numpy, tensorflow, keras, cnn, deep-learning, computer-vision, medical-imaging, healthcare-ai, image-encryption, privacy-preserving-ai
 ```
 
-## Project Story
+## Project Understanding With Patient X Example
 
 Patient X visits a hospital and receives a medical scan. The hospital wants to use AI to help analyze the scan, but Patient X's raw scan is sensitive healthcare data.
 
@@ -210,6 +210,8 @@ This project should be evaluated using both model performance metrics and privac
 | Confusion matrix | Normal vs abnormal prediction breakdown |
 | ROC-AUC | How well the model separates classes |
 
+Current status: classification metrics have not been generated yet because they require a labelled medical imaging evaluation dataset with multiple `Normal` and `Abnormal` images.
+
 ### Privacy and Image Quality Metrics
 
 | Metric | What It Shows |
@@ -221,7 +223,23 @@ This project should be evaluated using both model performance metrics and privac
 | NPCR | Pixel change rate after encryption |
 | UACI | Average intensity change after encryption |
 
-Important: real metric values should be added only after running evaluation on a labelled medical imaging dataset.
+The following privacy metrics were calculated from one completed local test upload:
+
+```text
+Original image: static/orig_download.png
+Encrypted image: static/enc_download.png
+```
+
+| Metric | Value |
+|---|---:|
+| MSE | 35474.0808 |
+| PSNR | 2.6317 dB |
+| SSIM | -0.4327 |
+| Entropy | 6.2667 |
+| NPCR | 99.9171% |
+| UACI | 68.1611% |
+
+These values show that the encrypted image is highly different from the original image, supporting the privacy-preserving goal of the project. Full classification metrics should be added after evaluating the model on a labelled medical imaging dataset.
 
 ## Screenshots
 
