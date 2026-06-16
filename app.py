@@ -7,8 +7,14 @@ import random
 from encryption import encrypt_image
 from model import run_diagnosis
 
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
 app = Flask(__name__)
-app.secret_key = 'your secret key'
+app.secret_key = os.getenv("FLASK_SECRET_KEY", "dev-only-secret-key")
 
 import mysql.connector
 
@@ -16,11 +22,11 @@ import mysql.connector
 def get_db():
     try:
         conn = mysql.connector.connect(
-            host="localhost",
-            port=3307,
-            user="root",
-            password="Afreen@123",
-            database="vtpip09_2022"
+            host=os.getenv("DB_HOST", "localhost"),
+            port=int(os.getenv("DB_PORT", "3307")),
+            user=os.getenv("DB_USER", "root"),
+            password=os.getenv("DB_PASSWORD", ""),
+            database=os.getenv("DB_NAME", "vtpip09_2022")
         )
         return conn
     except mysql.connector.Error as err:
@@ -249,6 +255,7 @@ def send():
 
         safe_name   = secure_filename(f.filename)
         static_dir  = os.path.join(app.root_path, 'static')
+        os.makedirs(static_dir, exist_ok=True)
         temp_path   = os.path.join(static_dir, safe_name)
 
         # Save uploaded file temporarily
@@ -323,7 +330,7 @@ def drequest():
 def display():
     cid    = session['id']
     cursor = get_cursor()
-    cursor.execute("SELECT filename FROM sreport WHERE id = %s", (cid,))
+    cursor.execute("SELECT * FROM sreport WHERE id = %s", (cid,))
     account = cursor.fetchone()
     return render_template('display.html', result=account)
 
@@ -349,7 +356,7 @@ def urequest():
 def udisplay():
     cid    = session['id']
     cursor = get_cursor()
-    cursor.execute("SELECT filename FROM sreport WHERE id = %s", (cid,))
+    cursor.execute("SELECT * FROM sreport WHERE id = %s", (cid,))
     account = cursor.fetchone()
     return render_template('udisplay.html', result=account)
 

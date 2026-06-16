@@ -1,8 +1,227 @@
 # Privacy-Preserving Deep Learning With Learnable Image Encryption on Medical Images
 
-**VTPIP09 Major Project** - A secure end-to-end medical imaging platform that encrypts patient scan images on the client side using an enhanced SKK learnable encryption scheme before sending them to a cloud server for DNN-based diagnosis, ensuring patient data privacy without compromising model performance.
+A healthcare AI project that protects medical scan privacy before deep learning analysis. The system encrypts a medical image before it is processed by a CNN/DNN model workflow, so raw patient scan data is not directly exposed to the server.
 
----
+## GitHub About
+
+Use this for the GitHub repository description:
+
+```text
+Privacy-preserving medical image analysis pipeline using Python, OpenCV, TensorFlow/Keras, CNN models, and learnable image encryption to protect patient scan data.
+```
+
+Suggested topics:
+
+```text
+python, flask, mysql, opencv, numpy, tensorflow, keras, cnn, deep-learning, computer-vision, medical-imaging, healthcare-ai, image-encryption, privacy-preserving-ai
+```
+
+## Project Story
+
+Patient X visits a hospital and receives a medical scan. The hospital wants to use AI to help analyze the scan, but Patient X's raw scan is sensitive healthcare data.
+
+If the original scan is sent directly to a cloud server, the image may be exposed to a semi-honest server. A semi-honest server may process the data correctly, but it may still be able to observe private medical information.
+
+This project solves that problem by encrypting Patient X's scan before the image is sent for deep learning analysis. The server receives an encrypted image instead of the raw medical scan.
+
+## Problem Definition
+
+Cloud-based AI systems are useful for medical image analysis, but medical images contain private patient information. The challenge is to use deep learning on medical images while reducing the risk of exposing the original scan.
+
+The main question is:
+
+```text
+Can we protect Patient X's medical image before cloud processing and still allow a deep learning model to perform useful prediction?
+```
+
+## Existing System
+
+Existing approaches such as SRCNN and GDSR focus mainly on image reconstruction or super-resolution quality.
+
+| Existing Approach | What It Does | Limitation |
+|---|---|---|
+| SRCNN | Uses convolutional layers for super-resolution | Focuses on image quality, not privacy |
+| GDSR | Uses high-frequency and low-frequency branches to improve reconstruction | Improves visual quality but does not directly protect raw medical images |
+| Earlier SKK-style encryption | Attempts learnable image encryption | Some previous schemes were partially attackable |
+| Raw cloud processing | Sends medical images to server for model use | Patient X's original scan may be exposed |
+
+## Proposed System
+
+The proposed system uses learnable image encryption before deep learning processing.
+
+| Proposed Component | Purpose |
+|---|---|
+| Client-side encryption | Protect Patient X's image before it leaves the trusted side |
+| Negative-positive transformation | Converts pixel values into opposite values |
+| Color channel shuffling | Changes the order of image color channels |
+| Statistical smoothing | Replaces local image blocks with statistical values such as median, mean, max, or min |
+| DNN/CNN model workflow | Performs prediction on encrypted medical images |
+| Secure report flow | Shows encrypted scan and diagnosis result to doctor and patient |
+
+## Existing vs Proposed
+
+| Area | Existing System | Proposed System |
+|---|---|---|
+| Main goal | Improve image quality or reconstruction | Protect medical image privacy during AI processing |
+| Input to server | Raw or weakly protected image | Encrypted medical image |
+| Privacy focus | Limited | Main design goal |
+| Model direction | SRCNN/GDSR style reconstruction | DenseNet-121 and XceptionNet style DNN/CNN workflow |
+| Patient X example | Patient X's scan may be visible to server | Patient X's scan is encrypted before server processing |
+
+## Technologies Used
+
+| Technology | Simple Explanation | Where It Is Used |
+|---|---|---|
+| Python | Main programming language | Backend, encryption, model logic |
+| Flask | Lightweight web framework | Patient, doctor, and lab/admin portal |
+| MySQL | Relational database | Users, doctors, symptom requests, scan reports |
+| OpenCV | Image processing library | Reading, resizing, and encrypting images |
+| NumPy | Numerical computing library | Pixel calculations and statistical filters |
+| TensorFlow/Keras | Deep learning framework | DenseNet-121 and XceptionNet model workflow |
+| CNN/DNN | Neural network model type for image data | Medical image prediction pipeline |
+| HTML/Jinja2 | Web template rendering | Frontend pages |
+| Bootstrap | UI styling framework | Dashboard layout and screens |
+
+## System Architecture
+
+```text
+Patient X
+   |
+   v
+Patient Portal
+   |
+   v
+Doctor Review
+   |
+   v
+Lab/Admin Uploads Medical Scan
+   |
+   v
+Image Preprocessing
+   |
+   v
+Learnable Image Encryption
+   |
+   v
+Encrypted Medical Image
+   |
+   v
+DNN/CNN Model Workflow
+   |
+   v
+Diagnosis Result
+   |
+   v
+Encrypted Report Stored in MySQL
+   |
+   v
+Doctor and Patient View Report
+```
+
+## DNN Model Workflow
+
+The DNN architecture represents the model stage of the project.
+
+![DNN Model Workflow](docs/assets/dnn-model-workflow.png)
+
+```text
+Encrypted medical image
+   |
+   v
+Prepare training or prediction dataset
+   |
+   v
+Build DNN/CNN model
+   |
+   v
+Initialize model parameters
+   |
+   v
+Train/update parameters using optimization and backpropagation
+   |
+   v
+Complete model training or inference
+   |
+   v
+Output prediction result
+```
+
+In this project, Patient X's encrypted image is passed through a CNN/DNN style model workflow. The model learns image patterns through hidden layers and produces a final healthcare prediction result.
+
+## End-to-End Workflow With Patient X
+
+| Step | What Happens | Patient X Example |
+|---|---|---|
+| 1 | Patient registers and logs in | Patient X creates an account |
+| 2 | Patient submits symptoms | Patient X describes symptoms |
+| 3 | Doctor reviews request | Doctor accepts Patient X's case |
+| 4 | Lab/Admin uploads scan | Lab uploads Patient X's scan image |
+| 5 | Image is resized | Scan is resized to 256 x 256 |
+| 6 | Image is encrypted | Raw scan becomes encrypted scan |
+| 7 | Encrypted image is processed | DNN/CNN model workflow analyzes it |
+| 8 | Diagnosis is generated | Result is Normal or Abnormal |
+| 9 | Report is stored | MySQL stores encrypted filename and result |
+| 10 | Report is viewed | Doctor and Patient X view encrypted scan report |
+
+## Encryption Pipeline
+
+| Stage | Method | Simple Meaning |
+|---|---|---|
+| 1 | Negative-positive transformation | Turns each pixel into its opposite value |
+| 2 | Color channel shuffling | Rearranges color channels so visual meaning is harder to inspect |
+| 3 | Statistical smoothing | Breaks the image into blocks and replaces each block with median, mean, max, or min values |
+
+## Model Output
+
+The model workflow produces:
+
+| Output | Meaning |
+|---|---|
+| Encrypted scan image | Privacy-protected version of Patient X's scan |
+| DenseNet-121 result | Prediction from DenseNet-121 workflow |
+| XceptionNet result | Prediction from XceptionNet workflow |
+| Final diagnosis | Combined result shown to doctor and patient |
+| Confidence values | Model confidence or fallback analysis values |
+| Access token | Secure report access key |
+
+Example output:
+
+```text
+Uploaded scan: patient_x_scan.png
+Encrypted scan: enc_patient_x_scan.png
+DenseNet-121: Abnormal - Further Examination Required
+XceptionNet: Normal
+Final diagnosis: Abnormal - Further Examination Required
+Access key: A7kP92LmQx
+```
+
+## Evaluation Metrics
+
+This project should be evaluated using both model performance metrics and privacy preservation metrics.
+
+### Model Performance Metrics
+
+| Metric | What It Shows |
+|---|---|
+| Accuracy | Overall correct predictions |
+| Precision | How correct abnormal predictions are |
+| Recall | How many actual abnormal cases are detected |
+| F1-score | Balance between precision and recall |
+| Confusion matrix | Normal vs abnormal prediction breakdown |
+| ROC-AUC | How well the model separates classes |
+
+### Privacy and Image Quality Metrics
+
+| Metric | What It Shows |
+|---|---|
+| MSE | Pixel-level difference between original and encrypted image |
+| PSNR | Distortion level after encryption |
+| SSIM | Structural similarity between original and encrypted image |
+| Entropy | Randomness in encrypted image |
+| NPCR | Pixel change rate after encryption |
+| UACI | Average intensity change after encryption |
+
+Important: real metric values should be added only after running evaluation on a labelled medical imaging dataset.
 
 ## Screenshots
 
@@ -22,249 +241,143 @@
 ![Patient Dashboard](Screenshots/Patient_dashboard.png)
 
 ### Patient Reports
-![Patient Reports](Screenshots/Pt_Reports.png)
+![Patient Reports](Screenshots/Pt_Reports%20.png)
 
----
+## Folder Structure
 
-## Abstract
-
-The growing dependency on cloud servers for training Deep Neural Network (DNN) models raises serious privacy concerns, especially in the medical domain. Cloud servers are considered **semi-honest**  they process data correctly but may attempt to observe and exploit it. Sharing raw medical images with such servers exposes sensitive patient data.
-
-This project proposes an enhanced **Learnable Image Encryption Scheme** based on the original SKK scheme. Medical images are encrypted on the client side before being transmitted to the server. The encrypted images are then used for DNN training using **DenseNet-121** and **XceptionNet** models. The experiment demonstrates that privacy can be effectively preserved while maintaining diagnostic accuracy comparable to training on raw images.
-
----
-
-## Problem Statement - Existing System
-
-The existing approach (SRCNN/GDSR-based) has the following limitations:
-
-- **No Privacy Protection:** Raw medical images are sent directly to cloud servers for DNN training, exposing sensitive patient information
-- **Vulnerable Encryption:** Previous encryption schemes (early SKK variants) have been partially attacked in prior studies
-- **SRCNN Limitation:** Uses bicubic interpolation for super-resolution without external knowledge — lacks privacy awareness
-- **GDSR Network:** Left-right asymmetric SR architecture improves quality but does not address data privacy
-
----
-
-## Proposed Solution
-
-Our system introduces an enhanced version of the SKK encryption scheme with three stages:
-
-### Stage 1 - Negative-Positive Transformation
-Inverts all pixel values (`new_pixel = 255 - pixel`) to obscure the visual content of the image before it leaves the client.
-
-### Stage 2 - Color Channel Shuffling
-Randomly shuffles the RGB channels of the image using a secret permutation key, making colour-based pattern recognition impossible without the key.
-
-### Stage 3 - Statistical Smoothing (4 Filters)
-Divides the image into fixed-size blocks and applies one of the following filters to fill all elements of a block with a single statistical value:
-
-| Filter | Operation |
-|--------|-----------|
-| Median Filter | Fills block with median pixel value |
-| Mean Filter | Fills block with mean pixel value |
-| Maximum Filter | Fills block with maximum pixel value |
-| Minimum Filter | Fills block with minimum pixel value |
-
-After all three stages, the encrypted image is sent to the server for DNN training.
-
----
-
-## DNN Models Used
-
-| Model | Architecture | Input Size | Batch Size | Optimizer |
-|-------|-------------|-----------|-----------|-----------|
-| DenseNet-121 | Dense Connections CNN | 256 × 256 | 35 | SGD (momentum=0.9) |
-| XceptionNet | Depthwise Separable CNN | 256 × 256 | 35 | SGD (momentum=0.9) |
-
-Both models are trained on encrypted medical images from open-source datasets. The final diagnosis is determined by a majority vote between both models.
-
----
-
-## System Workflow
-
-```
-Patient submits symptoms via web portal
-              ↓
-Doctor reviews and forwards case to Lab
-              ↓
-Lab uploads medical scan image
-              ↓
-[CLIENT SIDE]
-Image encrypted using Enhanced SKK Scheme:
-  → Negative-Positive Transformation
-  → Color Channel Shuffling
-  → Statistical Smoothing (Median Filter)
-              ↓
-Encrypted image sent to server (cloud)
-              ↓
-[SERVER SIDE]
-Data augmentation on encrypted image
-              ↓
-DenseNet-121 & XceptionNet run diagnosis
-              ↓
-Secure 10-character access token generated
-              ↓
-Doctor views encrypted scan + diagnosis result
-Patient views scan using personal access key
+```text
+Major-project-VTPIP09/
+  app.py                    Flask web application and route logic
+  encryption.py             Learnable image encryption pipeline
+  model.py                  DenseNet-121 and XceptionNet diagnosis workflow
+  requirements.txt          Core app dependencies
+  requirements-ml.txt       Optional TensorFlow/Keras dependency
+  vtpip09_2022_setup.sql    MySQL database setup
+  update_db.sql             Report table update script
+  templates/                HTML/Jinja2 web pages
+  Screenshots/              Project output screenshots
+  docs/                     Beginner explanation, metrics plan, GitHub polish
+  VTPIP09.docx              Original academic project documentation
 ```
 
----
-
-## System Architecture
-
-The system follows a three-tier architecture:
-
-- **Client Tier:** Patient, Doctor, Admin web portal (Flask + Bootstrap)
-- **Application Tier:** Encryption module (SKK), DNN models (DenseNet-121, XceptionNet), Flask backend
-- **Data Tier:** MySQL database storing users, doctor records, symptom submissions, encrypted reports
-
----
-
-## What Has Been Achieved
-
-| Feature | Details | Status |
-|---------|---------|--------|
-| Role-based web portal | Admin, Doctor, Patient dashboards | 
-| Patient registration & login | Email + password authentication | 
-| Doctor registration & login | Email + password + department | 
-| Symptom submission workflow | Patient → Doctor → Lab → Report | 
-| Scan image upload by lab | File upload with secure storage | 
-| SKK Encryption — Stage 1 | Negative-positive transformation | 
-| SKK Encryption — Stage 2 | Color channel shuffling | 
-| SKK Encryption — Stage 3 | Median / Mean / Max / Min filters | 
-| Image resized to 256×256 | Before DNN input as per requirement |
-| DenseNet-121 integration | Pre-trained model for medical diagnosis | 
-| XceptionNet integration | Pre-trained model for cross-validation |  
-| Majority-vote final diagnosis | Combined result from both models | 
-| Encrypted image displayed to doctor | Doctor views encrypted scan | 
-| AI diagnosis result shown | Normal / Abnormal with confidence % | 
-| Secure access token (10-char) | Patient uses key to access report | 
-| MySQL database (4 tables) | user, doctor, userdet, sreport | 
-| Privacy details shown in UI | Encryption scheme details visible | 
-
----
-
-## Project Outcome
-
-The implemented system demonstrates:
-
-1. **Privacy Preservation:** Medical images are never transmitted in raw form. The enhanced SKK scheme with statistical smoothing ensures the encrypted image visually reveals no diagnostic information to a semi-honest server.
-
-2. **DNN Compatibility:** Both DenseNet-121 and XceptionNet successfully process the encrypted 256×256 images and produce diagnosis results, proving that privacy-preserving DNN training is feasible.
-
-3. **Trade-off Achievement:** The system balances the trade-off between model accuracy and image security — the DNN models retain diagnostic capability even on encrypted inputs.
-
-4. **Improved Security Over Existing SKK:** The addition of statistical smoothing (median, mean, max, min filters) hardens the encryption against partial attacks that affected earlier SKK variants.
-
-5. **End-to-End Secure Workflow:** From symptom submission to encrypted scan report delivery, the entire pipeline is secured with role-based access and cryptographic tokens.
-
----
-
-## What More Can Be Done
-
-| Enhancement | Details |
-|-------------|---------|
-| Train DenseNet-121 from scratch | Fine-tune on labelled chest X-ray / MRI datasets |
-| Train XceptionNet from scratch | Domain-specific training for higher accuracy |
-| Accuracy comparison study | Raw vs encrypted image training accuracy metrics |
-| Privacy attack simulation | Test resistance to pixel inference and channel attacks |
-| Block size optimisation | Evaluate best block size (3×3, 8×8, 16×16) for each filter |
-| All 4 filter comparison | Show accuracy difference between median/mean/max/min |
-| Confusion matrix & metrics | Precision, recall, F1-score on diagnosis results |
-| PSNR / SSIM analysis | Measure visual distortion introduced by encryption |
-| Real medical dataset training | CheXNet, NIH Chest X-ray, ISIC skin dataset |
-| Client-side JavaScript encryption | Encrypt in browser before upload using WebCrypto API |
-
----
-
-## Tech Stack
-
-| Technology | Purpose |
-|-----------|---------|
-| Python 3 | Backend language |
-| Flask | Web framework |
-| MySQL | Database |
-| OpenCV | Image processing & encryption |
-| NumPy | Statistical filter operations |
-| TensorFlow / Keras | DenseNet-121 & XceptionNet |
-| Bootstrap 4 | Frontend UI |
-| HTML / Jinja2 | Templating |
-
----
-
-## Installation & Setup
+## Installation
 
 ### 1. Clone the Repository
+
 ```bash
 git clone https://github.com/27-Afreen/Major-project-VTPIP09.git
 cd Major-project-VTPIP09
 ```
 
-### 2. Install Dependencies
+### 2. Create a Virtual Environment
+
 ```bash
-pip install -r requirements.txt
-pip install tensorflow
+python -m venv .venv
+.venv\Scripts\activate
 ```
 
-### 3. Start MySQL and Setup Database
+### 3. Install Core Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+### 4. Optional: Install ML Dependencies
+
+TensorFlow is separated because it is larger than the normal web app dependencies.
+
+```bash
+pip install -r requirements-ml.txt
+```
+
+### 5. Configure Environment Variables
+
+Create a `.env` file using `.env.example` as the template.
+
+```text
+FLASK_SECRET_KEY=change-this-local-secret
+DB_HOST=localhost
+DB_PORT=3307
+DB_USER=root
+DB_PASSWORD=your_mysql_password
+DB_NAME=vtpip09_2022
+```
+
+### 6. Start MySQL and Set Up Database
+
 ```bash
 net start MySQL
 ```
-Open MySQL Command Line Client:
+
+Run the SQL setup scripts in MySQL:
+
 ```sql
 SOURCE path/to/vtpip09_2022_setup.sql;
 SOURCE path/to/update_db.sql;
 ```
 
-### 4. Configure app.py
-```python
-conn = mysql.connector.connect(
-    host="localhost",
-    port=3307,
-    user="root",
-    password="your_password",
-    database="vtpip09_2022"
-)
-```
+## How to Run
 
-### 5. Run
 ```bash
 python app.py
 ```
-Open: **http://127.0.0.1:5000**
 
----
+Open:
 
-## Database Schema
+```text
+http://127.0.0.1:5000
+```
 
-| Table | Columns |
-|-------|---------|
-| `user` | name, email, password, mobile, location |
-| `doctor` | name, email, password, mobile, department |
-| `userdet` | id, name, email, symptoms, DocId, status |
-| `sreport` | id, name, uid, did, filename, key1, diagnosis, densenet_conf, xception_conf |
+## Main Web Routes
 
----
+This is a Flask web app, so the project uses web routes instead of a pure REST API.
 
-## Advantages Over Existing System
+| Route | Purpose |
+|---|---|
+| `/` | Home page |
+| `/user` | Patient login page |
+| `/doctor` | Doctor login page |
+| `/admin` | Lab/admin login page |
+| `/uregister` | Patient registration |
+| `/dregister` | Doctor registration |
+| `/udoc` | Patient selects doctor |
+| `/usend` | Patient submits symptoms |
+| `/sreport` | Lab/admin views cases ready for scan upload |
+| `/send` | Lab/admin uploads scan and generates encrypted report |
+| `/display` | Doctor views encrypted scan report |
+| `/udisplay` | Patient views encrypted scan report |
 
-| Aspect | Existing (SRCNN) | Proposed |
-|--------|-----------------|----------|
-| Privacy | Raw images sent to cloud | Encrypted before transmission |
-| Security | Partially attackable | Enhanced SKK + smoothing |
-| DNN Models | SRCNN (super-resolution only) | DenseNet-121 + XceptionNet (diagnosis) |
-| Smoothing | None | Median / Mean / Max / Min filters |
-| Medical Application | Image quality improvement | Privacy-preserving diagnosis |
+## Skills This Project Proves
 
----
+| Skill | How This Project Proves It |
+|---|---|
+| Python | Backend logic, encryption module, model workflow |
+| Flask | Web app routes and user workflows |
+| MySQL | Database schema, user records, report storage |
+| OpenCV | Image reading, resizing, and transformation |
+| NumPy | Pixel-level statistical operations |
+| TensorFlow/Keras | Deep learning model workflow |
+| CNN/DNN | Medical image prediction architecture |
+| Healthcare AI | Medical scan analysis use case |
+| Privacy-preserving ML | Encrypted image processing before model use |
+| Secure data workflow | Raw patient scan exposure is reduced |
+| Documentation | Beginner-friendly explanation, workflow, metrics plan |
 
-## Hardware & Software Requirements
+## Resume Bullet Options
 
-**Hardware:** Intel i3+, 2GB RAM, 250GB HDD
-**Software:** Python 3.x, MySQL, TensorFlow, OpenCV, Flask, Windows 7+
+- Built a privacy-preserving medical imaging pipeline using Python, OpenCV, TensorFlow/Keras, CNNs, and learnable image encryption to protect raw patient scan data before deep learning analysis.
+- Developed a Flask and MySQL healthcare web application with patient, doctor, and lab/admin workflows for encrypted scan report management.
+- Implemented image encryption using negative-positive transformation, color channel shuffling, and statistical smoothing to reduce raw medical image exposure.
+- Designed a deep learning workflow using DenseNet-121 and XceptionNet style CNN models for encrypted medical image diagnosis.
 
----
+## Current Status
 
-## Developed By
+This repository contains the web application, encryption logic, model workflow, SQL setup, screenshots, and original project documentation.
 
-**Afreen** — [GitHub Profile](https://github.com/27-Afreen)
+Next planned improvements:
+
+1. Run the project locally end to end.
+2. Generate real output screenshots from a fresh run.
+3. Add real classification metrics.
+4. Add real privacy metrics.
+5. Deploy the app using a more advanced cloud-ready setup.

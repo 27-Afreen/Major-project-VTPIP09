@@ -1,4 +1,6 @@
-flask
+Flask
 mysql-connector-python
+numpy
 opencv-python
-werkzeug
+python-dotenv
+Werkzeug
