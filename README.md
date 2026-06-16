@@ -195,6 +195,37 @@ Final diagnosis: Abnormal - Further Examination Required
 Access key: A7kP92LmQx
 ```
 
+## Secure Access Key After Upload
+
+After the lab/admin uploads Patient X's scan, the system generates a 10-character access key for the report.
+
+This key is important because it connects the encrypted scan report to the patient and doctor workflow.
+
+| Step | What Happens |
+|---|---|
+| 1 | Lab/admin uploads Patient X's medical scan |
+| 2 | The system encrypts the uploaded image |
+| 3 | The model workflow generates a diagnosis result |
+| 4 | The system creates a 10-character report access key |
+| 5 | The key is stored in the MySQL `sreport` table under the `key1` column |
+| 6 | Doctor and patient can view the key from their report/request pages |
+
+Example from a completed local run:
+
+```text
+Report ID: 3
+Patient: Afreen Khan
+Encrypted report key: cVORqde04j
+Diagnosis: Normal
+```
+
+To check the key manually in MySQL:
+
+```sql
+USE vtpip09_2022;
+SELECT id, name, uid, did, filename, key1, diagnosis FROM sreport;
+```
+
 ## Evaluation Metrics
 
 This project should be evaluated using both model performance metrics and privacy preservation metrics.
