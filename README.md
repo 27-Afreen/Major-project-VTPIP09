@@ -412,21 +412,3 @@ This is a Flask web app, so the project uses web routes instead of a pure REST A
 | Secure data workflow | Raw patient scan exposure is reduced |
 | Documentation | Beginner-friendly explanation, workflow, metrics plan |
 
-## Resume Bullet Options
-
-- Built a privacy-preserving medical imaging pipeline using Python, OpenCV, TensorFlow/Keras, CNNs, and learnable image encryption to protect raw patient scan data before deep learning analysis.
-- Developed a Flask and MySQL healthcare web application with patient, doctor, and lab/admin workflows for encrypted scan report management.
-- Implemented image encryption using negative-positive transformation, color channel shuffling, and statistical smoothing to reduce raw medical image exposure.
-- Designed a deep learning workflow using DenseNet-121 and XceptionNet style CNN models for encrypted medical image diagnosis.
-
-## Current Status
-
-This repository contains the web application, encryption logic, model workflow, SQL setup, screenshots, and original project documentation.
-
-Next planned improvements:
-
-1. Run the project locally end to end.
-2. Generate real output screenshots from a fresh run.
-3. Add real classification metrics.
-4. Add real privacy metrics.
-5. Deploy the app using a more advanced cloud-ready setup.
